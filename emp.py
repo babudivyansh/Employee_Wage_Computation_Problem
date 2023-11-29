@@ -1,11 +1,11 @@
 """
 @Author: Divyansh Babu
 
-@Date: 2021-11-28 13:06
+@Date: 2021-11-29 13:06
 
 @Last Modified by: Divyansh Babu
 
-@Last Modified time: 2021-11-28 13:06
+@Last Modified time: 2021-11-29 13:06
 
 @Title : Employee Wage Computation Problem.
 """
@@ -23,7 +23,7 @@ def check_attendence():
     print("Welcome to Employee Wage Computation Program on Master Branch")
 
     FULL_TIME = 1
-    empType = random.randint(0, 100) % 2
+    empType = random.randint(0, 1)
     if empType == FULL_TIME:
         print("Employee is present")
     else:
