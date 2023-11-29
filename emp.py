@@ -21,14 +21,17 @@ def check_attendence():
     Return:None
     """
     print("Welcome to Employee Wage Computation Program on Master Branch")
-
-    FULL_TIME = 1
+    PART_TIME = 1
+    FULL_TIME = 2
     WAGE_PER_HR = 20
-    empType = random.randint(0, 100) % 2
+    empType = random.randint(0, 100) % 3
     workingHours = 0
     if empType == FULL_TIME:
-        print("Employee is present")
+        print("Employee is present Full time")
         workingHours = 8
+    elif empType == PART_TIME:
+        print("Employee is working Part time")
+        workingHours = 4
     else:
         print("Employee is not present")
     wage = workingHours * WAGE_PER_HR
