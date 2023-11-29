@@ -1,18 +1,18 @@
 """
 @Author: Divyansh Babu
 
-@Date: 2021-11-28 13:06
+@Date: 2021-11-29 13:26
 
 @Last Modified by: Divyansh Babu
 
-@Last Modified time: 2021-11-28 13:06
+@Last Modified time: 2021-11-29 16:47
 
 @Title : Employee Wage Computation Problem.
 """
 import random
 
 
-def check_attendence():
+def calculate_wage():
     """
     Description: implementation of Employee Wage Computation Problem.
 
@@ -24,7 +24,7 @@ def check_attendence():
 
     FULL_TIME = 1
     WAGE_PER_HR = 20
-    empType = random.randint(0, 100) % 2
+    empType = random.randint(0, 1)
     workingHours = 0
     if empType == FULL_TIME:
         print("Employee is present")
@@ -36,4 +36,4 @@ def check_attendence():
 
 
 if __name__ == '__main__':
-    check_attendence()
+    calculate_wage()
