@@ -21,35 +21,31 @@ def employee_wage_implementation():
     Return:None
     """
     print("Welcome to Employee Wage Computation Program on Master Branch")
-    # NOT_PRESENT = 0
-    # PART_TIME = 1
-    # FULL_TIME = 2
     WAGE_PER_HR = 20
-    WORKING_DAYS = 20
     MAX_WORKING_DAYS = 20
     MAX_WORKING_HRS = 100
-
-    totalWage = 0
-    if MAX_WORKING_DAYS <= 20 and MAX_WORKING_HRS <= 100:
-        for day in range(0, (MAX_WORKING_DAYS or MAX_WORKING_HRS)):
-            empType = random.randint(0, 2)
-            workingHours = 0
-            match empType:
-                case 0:
-                    print("Employee is not present")
-                case 1:
-                    print("Employee is present and working Part time")
-                    workingHours = 4
-                case 2:
-                    print("Employee is present and working Full time")
-                    workingHours = 8
-
-            wage = workingHours * WAGE_PER_HR
-            print("Day", day + 1, "wage is", wage)
-            totalWage += wage
-        print("Total wages of a month is: ", totalWage)
-    else:
-        print("Max working days or Max working hours is more the 20,100 respectively")
+    emp_working_hrs = 0
+    emp_working_days = 0
+    total_wage = 0
+    while emp_working_hrs < MAX_WORKING_HRS and emp_working_days < MAX_WORKING_DAYS:
+        empType = random.randint(0, 2)
+        working_hours = 0
+        match empType:
+            case 0:
+                working_hours = 0
+                # print("Employee is not present")
+            case 1:
+                # print("Employee is present and working Part time")
+                working_hours = 4
+            case 2:
+                # print("Employee is present and working Full time")
+                working_hours = 8
+        emp_working_hrs += working_hours
+        total_wage += working_hours * WAGE_PER_HR
+        emp_working_days += 1
+    print(emp_working_days)
+    print(f"Total working hours of an employee is: {emp_working_hrs}")
+    print(f"Total working days of an employee is: {total_wage}")
 
 
 if __name__ == '__main__':
