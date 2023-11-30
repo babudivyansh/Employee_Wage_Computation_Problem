@@ -21,32 +21,18 @@ def check_attendence():
     Return:None
     """
     print("Welcome to Employee Wage Computation Program on Master Branch")
-    PART_TIME = 0
-    FULL_TIME = 1
+    PART_TIME = 1
+    FULL_TIME = 2
     WAGE_PER_HR = 20
+    empType = random.randint(0, 2)
     workingHours = 0
 
-    def empType1():
-        """Description: implementation to get Employee Type.
-
-           Parameter: None
-
-           Return:Employee Type """
-        emp = random.randint(0, 1)
-        return emp
-def main():
-    empType = empType1()
-    
-
     if empType == FULL_TIME:
-        print("Employee is present")
-        pt_ft_wage = empType1()
-        if pt_ft_wage == FULL_TIME:
-            print("Employee is present Full time")
-            workingHours = 8
-        elif pt_ft_wage == PART_TIME:
-            print("Employee is working Part time")
-            workingHours = 4
+        print("Employee is present Full time")
+        workingHours = 8
+    elif empType == PART_TIME:
+        print("Employee is working Part time")
+        workingHours = 4
     else:
         print("Employee is not present")
     wage = workingHours * WAGE_PER_HR
@@ -54,4 +40,4 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    check_attendence()
