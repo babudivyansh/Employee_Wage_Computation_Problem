@@ -30,7 +30,7 @@ def employee_wage_implementation():
     MAX_WORKING_HRS = 100
 
     totalWage = 0
-    if MAX_WORKING_DAYS <= 20 or MAX_WORKING_HRS <= 100:
+    if MAX_WORKING_DAYS <= 20 and MAX_WORKING_HRS <= 100:
         for day in range(0, (MAX_WORKING_DAYS or MAX_WORKING_HRS)):
             empType = random.randint(0, 2)
             workingHours = 0
