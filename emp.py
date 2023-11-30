@@ -21,28 +21,35 @@ def employee_wage_implementation():
     Return:None
     """
     print("Welcome to Employee Wage Computation Program on Master Branch")
+    # NOT_PRESENT = 0
     # PART_TIME = 1
     # FULL_TIME = 2
     WAGE_PER_HR = 20
     WORKING_DAYS = 20
-    totalWage = 0
-    for day in range(1, WORKING_DAYS + 1):
+    MAX_WORKING_DAYS = 20
+    MAX_WORKING_HRS = 100
 
-        empType = random.randint(0, 2)
-        workingHours = 0
-        match empType:
-            case 0:
-                print("Employee is present Full time")
-                workingHours = 8
-            case 1:
-                print("Employee is working Part time")
-                workingHours = 4
-            case 2:
-                print("Employee is not present")
-        wage = workingHours * WAGE_PER_HR
-        print("Day", day, "wage is", wage)
-        totalWage += wage
-    print("Total wages of a month is: ", totalWage)
+    totalWage = 0
+    if MAX_WORKING_DAYS <= 20 or MAX_WORKING_HRS <= 100:
+        for day in range(0, (MAX_WORKING_DAYS or MAX_WORKING_HRS)):
+            empType = random.randint(0, 2)
+            workingHours = 0
+            match empType:
+                case 0:
+                    print("Employee is not present")
+                case 1:
+                    print("Employee is present and working Part time")
+                    workingHours = 4
+                case 2:
+                    print("Employee is present and working Full time")
+                    workingHours = 8
+
+            wage = workingHours * WAGE_PER_HR
+            print("Day", day + 1, "wage is", wage)
+            totalWage += wage
+        print("Total wages of a month is: ", totalWage)
+    else:
+        print("Max working days or Max working hours is more the 20,100 respectively")
 
 
 if __name__ == '__main__':
