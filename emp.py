@@ -1,22 +1,24 @@
 """
 @Author: Divyansh Babu
 
-@Date: 2021-12-05 14:30
+@Date: 2021-12-05 16:34
 
 @Last Modified by: Divyansh Babu
 
-@Last Modified time: 2021-12-05 14:30
+@Last Modified time: 2021-12-05 16:34
 
 @Title : Employee Wage Computation Problem.
 """
 import random
 
 
-class EmployeeWageProblem:
-    def __init__(self):
-        self.wage_per_hrs = int(input("Enter wage per Hours: "))
-        self.max_working_days = int(input("Enter Max working Days: "))
-        self.max_working_hrs = int(input("Enter Max working Hours: "))
+class Employee:
+    def __init__(self, emp_name, wage_per_hours, max_working_day, max_working_hours):
+        self.wage_per_hrs = wage_per_hours
+        self.max_working_days = max_working_day
+        self.max_working_hrs = max_working_hours
+        self.employee_name = emp_name
+        self.total_wage = 0
 
     def employee_wage_implementation(self):
         """
@@ -29,7 +31,6 @@ class EmployeeWageProblem:
         print("Welcome to Employee Wage Computation Program on Master Branch")
         emp_working_hrs = 0
         emp_working_days = 0
-        total_wage = 0
         while emp_working_hrs < self.max_working_hrs and emp_working_days < self.max_working_days:
             empType = random.randint(0, 2)
             working_hours = 0
@@ -44,13 +45,18 @@ class EmployeeWageProblem:
                     # print("Employee is present and working Full time")
                     working_hours = 8
             emp_working_hrs += working_hours
-            total_wage += working_hours * self.wage_per_hrs
+            self.total_wage += working_hours * self.wage_per_hrs
             emp_working_days += 1
-        print(f"Max working Days: {emp_working_days}")
-        print(f"Total working hours of an employee is: {emp_working_hrs}")
-        print(f"Total working days of an employee is: {total_wage}")
+        # print(f"Max working Days: {emp_working_days}")
+        # print(f"Total working hours of an employee is: {emp_working_hrs}")
+        # print(f"Total working days of an employee is: {self.total_wage}")
 
 
 if __name__ == '__main__':
-    employee_wage_problem = EmployeeWageProblem()
-    employee_wage_problem.employee_wage_implementation()
+    employee_name = input("Enter the emp name: ")
+    wage_per_hrs = int(input("Enter wage per Hours: "))
+    max_working_days = int(input("Enter Max working Days: "))
+    max_working_hrs = int(input("Enter Max working Hours: "))
+    employee_obj = Employee(employee_name, wage_per_hrs, max_working_days, max_working_hrs)
+    employee_obj.employee_wage_implementation()
+    print(f"{employee_obj.total_wage}")
