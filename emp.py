@@ -1,11 +1,11 @@
 """
 @Author: Divyansh Babu
 
-@Date: 2021-12-05 16:34
+@Date: 2021-12-06 17:06
 
 @Last Modified by: Divyansh Babu
 
-@Last Modified time: 2021-12-05 16:34
+@Last Modified time: 2021-12-06 16:06
 
 @Title : Employee Wage Computation Problem.
 """
@@ -28,7 +28,7 @@ class Employee:
 
         Return:None
         """
-        print("Welcome to Employee Wage Computation Program on Master Branch")
+        # print("Welcome to Employee Wage Computation Program on Master Branch")
         emp_working_hrs = 0
         emp_working_days = 0
         while emp_working_hrs < self.max_working_hrs and emp_working_days < self.max_working_days:
@@ -52,11 +52,75 @@ class Employee:
         # print(f"Total working days of an employee is: {self.total_wage}")
 
 
+class Company:
+    def __init__(self, company_name):
+        self.comp_name = company_name
+        self.employee_dict = {}
+
+    def add_employee(self, employee_obj: Employee):
+        self.employee_dict.update({employee_obj.employee_name: employee_obj})
+
+    def employee_details(self):
+        for key, value in self.employee_dict.items():
+            print(f"Name: {key} Total Wage: {value.total_wage} Company Name: {self.comp_name} ")
+
+    def get_employee(self, employee_name):
+        emp: Employee = self.employee_dict.get(employee_name)
+        print("Employee is fetched!!")
+
+    def update_employee(self, employee_name):
+        employee_obj: Employee = self.employee_dict.get(employee_name)
+        if employee_obj:
+            employee_obj.employee_wage_implementation()
+            self.employee_dict.update({employee_name: employee_obj})
+        else:
+            print("Employee is not Found!!")
+
+    def delete_employee(self, employee_name):
+        employee_boj: Employee = self.employee_dict.get(employee_name)
+        if employee_boj:
+            self.employee_dict.pop(employee_name)
+            print("deleted!!")
+        else:
+            print("Employee is not Found!!")
+
+
+def main():
+    # print(f"{employee_obj.total_wage}")
+    company_obj = Company('A')
+
+    while True:
+        print(
+            "choice 1 for add\nchoice 2 for all details of employee\nchoice 3 to get an item from dictionary\nchoice 4"
+            " for update an item of dictionary\nchoice 5 for delete an item of dictionary\nchoice 6 for exit")
+        user_choice = int(input("Enter your choice: "))
+        match user_choice:
+            case 1:
+                employee_name = input("Enter the emp name: ")
+                wage_per_hrs = int(input("Enter wage per Hours: "))
+                max_working_days = int(input("Enter Max working Days: "))
+                max_working_hrs = int(input("Enter Max working Hours: "))
+                employee_obj = Employee(employee_name, wage_per_hrs, max_working_days, max_working_hrs)
+                employee_obj.employee_wage_implementation()
+                company_obj.add_employee(employee_obj)  # to add an item to dictionary
+            case 2:
+                company_obj.employee_details()  # for all details of employee
+            case 3:
+                employee_name = input("Enter the emp name: ")
+                wage_per_hrs = int(input("Enter wage per Hours: "))
+                max_working_days = int(input("Enter Max working Days: "))
+                max_working_hrs = int(input("Enter Max working Hours: "))
+                employee_obj = Employee(employee_name, wage_per_hrs, max_working_days, max_working_hrs)
+                company_obj.get_employee(employee_obj)  # to get an item from dictionary
+            case 4:
+                employee_name = input("Enter the emp name: ")
+                company_obj.update_employee(employee_name)  # for update an item of dictionary
+            case 5:
+                employee_name = input("Enter the emp name: ")
+                company_obj.delete_employee(employee_name)  # for delete an item of dictionary
+            case 6:
+                break
+
+
 if __name__ == '__main__':
-    employee_name = input("Enter the emp name: ")
-    wage_per_hrs = int(input("Enter wage per Hours: "))
-    max_working_days = int(input("Enter Max working Days: "))
-    max_working_hrs = int(input("Enter Max working Hours: "))
-    employee_obj = Employee(employee_name, wage_per_hrs, max_working_days, max_working_hrs)
-    employee_obj.employee_wage_implementation()
-    print(f"{employee_obj.total_wage}")
+    main()
