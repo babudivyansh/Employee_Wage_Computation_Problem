@@ -1,16 +1,20 @@
 """
 @Author: Divyansh Babu
 
-@Date: 2023-12-07 17:43
+@Date: 2023-12-11 17:15
 
 @Last Modified by: Divyansh Babu
 
-@Last Modified time: 2023-12-07 16:43
+@Last Modified time: 2023-12-11 16:15
 
 @Title : Employee Wage Computation Problem.
 """
 import random
+import logging
 
+logging.basicConfig(filename='employee_log.log',level=logging.DEBUG,format='%(asctime)s %(message)s',datefmt='%m:%d:%y '
+                                '%I:%M:%S %p')
+logger = logging.getLogger(__name__)
 
 class Employee:
     def __init__(self, emp_name, wage_per_hours, max_working_day, max_working_hours):
@@ -26,28 +30,25 @@ class Employee:
         Parameter: None
         Return:None
         """
-        try:
             # print("Welcome to Employee Wage Computation Program on Master Branch")
-            emp_working_hrs = 0
-            emp_working_days = 0
-            while emp_working_hrs < self.max_working_hrs and emp_working_days < self.max_working_days:
-                empType = random.randint(0, 2)
-                working_hours = 0
-                match empType:
-                    case 0:
-                        working_hours = 0
-                        # print("Employee is not present")
-                    case 1:
-                        # print("Employee is present and working Part time")
-                        working_hours = 4
-                    case 2:
-                        # print("Employee is present and working Full time")
-                        working_hours = 8
-                emp_working_hrs += working_hours
-                self.total_wage += working_hours * self.wage_per_hrs
-                emp_working_days += 1
-        except Exception as e:
-            print(e)
+        emp_working_hrs = 0
+        emp_working_days = 0
+        while emp_working_hrs < self.max_working_hrs and emp_working_days < self.max_working_days:
+            empType = random.randint(0, 2)
+            working_hours = 0
+            match empType:
+                case 0:
+                    working_hours = 0
+                    # print("Employee is not present")
+                case 1:
+                    # print("Employee is present and working Part time")
+                    working_hours = 4
+                case 2:
+                    # print("Employee is present and working Full time")
+                    working_hours = 8
+            emp_working_hrs += working_hours
+            self.total_wage += working_hours * self.wage_per_hrs
+            emp_working_days += 1
         # print(f"Max working Days: {emp_working_days}")
         # print(f"Total working hours of an employee is: {emp_working_hrs}")
         # print(f"Total working days of an employee is: {self.total_wage}")
@@ -64,10 +65,9 @@ class Company:
         Parameter: employee class object
         Return:None
         """
-        try:
-            self.employee_dict.update({employee_obj.employee_name: employee_obj})
-        except Exception as e:
-            print(e)
+
+        self.employee_dict.update({employee_obj.employee_name: employee_obj})
+
 
     def employee_details(self):
         """
@@ -75,11 +75,8 @@ class Company:
         Parameter: None
         Return:None
         """
-        try:
-            for key, value in self.employee_dict.items():
-                print(f"Name: {key} Total Wage: {value.total_wage} Company Name: {self.comp_name} ")
-        except Exception as e:
-            print(e)
+        for key, value in self.employee_dict.items():
+            logger.info(f"Name: {key} Total Wage: {value.total_wage} Company Name: {self.comp_name} ")
 
     def get_employee(self, employee_name):
         """
@@ -87,11 +84,8 @@ class Company:
         Parameter: String
         Return:None
         """
-        try:
-            self.employee_dict.get(employee_name)
-            print(f"{employee_name} Employee is fetched!!")
-        except Exception as e:
-            print(e)
+        self.employee_dict.get(employee_name)
+        logger.info(f"{employee_name} Employee is fetched!!")
 
     def update_employee(self, employee_name):
         """
@@ -99,16 +93,14 @@ class Company:
         Parameter: String
         Return:None
         """
-        try:
-            employee_obj: Employee = self.employee_dict.get(employee_name)
-            if employee_obj:
-                employee_obj.employee_wage_implementation()
-                self.employee_dict.update({employee_name: employee_obj})
-                print(f"{employee_name} UpDated!!")
-            else:
-                print("Employee is not Found!!")
-        except Exception as e:
-            print(e)
+        employee_obj: Employee = self.employee_dict.get(employee_name)
+        if employee_obj:
+            employee_obj.employee_wage_implementation()
+            self.employee_dict.update({employee_name: employee_obj})
+            logger.info(f"{employee_name} UpDated!!")
+        else:
+            logger.info("Employee is not Found!!")
+
 
     def delete_employee(self, employee_name):
         """
@@ -116,15 +108,12 @@ class Company:
         Parameter: String
         Return:None
         """
-        try:
-            employee_boj: Employee = self.employee_dict.get(employee_name)
-            if employee_boj:
-                self.employee_dict.pop(employee_name)
-                print("deleted!!")
-            else:
-                print("Employee is not Found!!")
-        except Exception as e:
-            print(e)
+        employee_boj: Employee = self.employee_dict.get(employee_name)
+        if employee_boj:
+            self.employee_dict.pop(employee_name)
+            logger.info("deleted!!")
+        else:
+            logger.info("Employee is not Found!!")
 
 
 class MultipleCompany:
@@ -137,11 +126,8 @@ class MultipleCompany:
         Parameter: company object
         Return:None
         """
-        try:
-            self.company_dict.update({company_obj.comp_name: company_obj})
-            print(f"{company_obj.comp_name} is Added!!")
-        except Exception as e:
-            print(e)
+        self.company_dict.update({company_obj.comp_name: company_obj})
+        logger.info(f"{company_obj.comp_name} is Added!!")
 
     def all_comp_details(self):
         """
@@ -149,11 +135,8 @@ class MultipleCompany:
         Parameter: company object
         Return:None
         """
-        try:
-            for key, comp_data in self.company_dict.items():
-                print(f"Company Name: {key} Company Data: {comp_data.employee_dict}")
-        except Exception as e:
-            print(e)
+        for key, comp_data in self.company_dict.items():
+            logger.info(f"Company Name: {key} Company Data: {comp_data.employee_dict}")
 
     def get_company(self, comp_name):
         """
@@ -169,14 +152,11 @@ class MultipleCompany:
         Parameter: String
         Return:None
         """
-        try:
-            if comp_name in self.company_dict:
-                self.company_dict.pop(comp_name)
-                print(f"{comp_name} is deleted.")
-            else:
-                print("Company not Found")
-        except Exception as e:
-            print(e)
+        if comp_name in self.company_dict:
+            self.company_dict.pop(comp_name)
+            logger.info(f"{comp_name} is deleted.")
+        else:
+            logger.info("Company not Found")
 
     def get_company_with_all_employee(self, comp_name):
         """
@@ -185,14 +165,11 @@ class MultipleCompany:
         Return:None
         """
         company_obj: Company = self.company_dict.get(comp_name)
-        try:
-            if company_obj:
-                print(f"{company_obj.comp_name} and total employee in company {len(company_obj.employee_dict)}")
-                company_obj.employee_details()
-            else:
-                print("company is not present!!")
-        except Exception as e:
-            print(e)
+        if company_obj:
+            logger.info(f"{company_obj.comp_name} and total employee in company {len(company_obj.employee_dict)}")
+            company_obj.employee_details()
+        else:
+            logger.info("company is not present!!")
 
 
 def main():
@@ -218,11 +195,12 @@ def main():
                     employee_obj = Employee(employee_name, wage_per_hrs, max_working_days, max_working_hrs)
                     employee_obj.employee_wage_implementation()
                     company_obj.add_employee(employee_obj)  # to add an item to dictionary
+                    multi_company_obj.add_company(company_obj)
                 case 2:
                     comp_name = input("Enter your company name: ")
                     company_obj = multi_company_obj.get_company(comp_name)
                     if company_obj is None:
-                        print("Company not found")
+                        pass
                     company_obj.employee_details()  # for all details of employee
                 case 3:
                     employee_name = input("Enter the emp name: ")
@@ -236,7 +214,7 @@ def main():
                     comp_name = input("Enter your company name: ")
                     company_obj = multi_company_obj.get_company(comp_name)
                     if company_obj is None:
-                        pass
+                        logger.info('Company not found!!')
                     company_obj.update_employee(employee_name)  # for update an item of dictionary
                 case 5:
                     employee_name = input("Enter the emp name: ")
@@ -262,7 +240,7 @@ def main():
                 case 10:
                     break
     except Exception as e:
-        print(e)
+        logger.exception(e)
 
 
 if __name__ == '__main__':
